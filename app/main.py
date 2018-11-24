@@ -7,6 +7,7 @@ from app.dto.PublicGameState import PublicGameState
 from app.dto.PublicPlayer import PublicPlayer
 from app.dto.ReturnDirections import ReturnDirections
 from app.eatEverythingStrategy import EatEverythingStrategy
+from app.WalkAroundStrategy import WalkAroungStrategy
 
 
 @bottle.post('/start')
@@ -23,8 +24,9 @@ def move():
     my_position = players[my_player]['position']
     print("I am player: "+str(my_player))
     print("My position is: "+str(my_position))
-    strategy = EatEverythingStrategy(game_field, my_player, my_position)
+    #strategy = EatEverythingStrategy(game_field, my_player, my_position)
     #strategy = BringHomePointsStrategy(game_field, my_player, my_position)
+    strategy = WalkAroungStrategy(game_field, my_player, my_position)
     return strategy.get_move()
 
 application = bottle.default_app()

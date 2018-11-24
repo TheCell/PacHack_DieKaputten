@@ -19,7 +19,7 @@ class EatEverythingStrategy(Strategy):
         print(current_position)
         print(wanted_position)
         if current_position != wanted_position:
-            for position in StrategyHelper.get_legal_directions_xypos(current_position, self.game_field):
+            for position in StrategyHelper.get_legal_directions_yxpos(current_position, self.game_field):
                 new_position = position
                 if new_position not in path:
                     path.append(new_position)
