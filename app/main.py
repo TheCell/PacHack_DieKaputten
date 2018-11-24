@@ -22,7 +22,7 @@ def move():
     players = data.publicPlayers
     my_player = data.agent_id
     my_position = players[my_player]['position']
-    Bot.updateValues(game_field, players, my_player, my_position)
+    #Bot.updateValues(game_field, players, my_player, my_position)
 
     print("I am player: "+str(my_player))
     print("My position is: "+str(my_position))
@@ -33,7 +33,7 @@ def move():
 
 application = bottle.default_app()
 if __name__ == '__main__':
-    idiotBot = Bot()
+    #idiotBot = Bot()
 
     bottle.run(application, host=os.getenv('IP', '0.0.0.0'), port=os.getenv('PORT', '8080'))
 
