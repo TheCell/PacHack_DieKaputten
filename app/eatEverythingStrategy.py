@@ -3,21 +3,22 @@ from app.strategy import Strategy
 from app.StrategyHelper import StrategyHelper
 
 class EatEverythingStrategy(Strategy):
+    path = []
+
     def __init__(self, game_field, my_player, my_position):
         super().__init__(game_field, my_player, my_position)
         self.food_positions = []
-        self.path = []
-        self.debug()
+
+    def get_move(self):
+        self.choice = ReturnDirections.random()
 
     def get_shortest_path(self):
         #for wanted_position in self.food_positions:
             wanted_position=self.get_food_position()
-            self.path = self.get_path_to_position(self.my_position, wanted_position, self.path)
+            EatEverythingStrategy.path = self.get_path_to_position(self.my_position, wanted_position, EatEverythingStrategy.path)
             print("done")
 
     def get_path_to_position(self, current_position, wanted_position, path):
-        print(current_position)
-        print(wanted_position)
         if current_position != wanted_position:
             for position in StrategyHelper.get_legal_directions_yxpos(current_position, self.game_field):
                 new_position = position
@@ -26,7 +27,7 @@ class EatEverythingStrategy(Strategy):
                     print(path)
                     return self.get_path_to_position(new_position, wanted_position, path)
         else:
-            return self.path
+            return path
 
     def countElement(a):
         g = {}
@@ -52,10 +53,3 @@ class EatEverythingStrategy(Strategy):
             return True
         else:
             return False
-
-    def debug(self):
-        self.find_all_food()
-        #pos = self.get_food_position()
-        #self.get_path_to_position(self.my_position, pos, [])
-        self.get_shortest_path()
-        #print(self.food_positions)

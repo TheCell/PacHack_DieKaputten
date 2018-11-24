@@ -7,13 +7,13 @@ class StrategyHelper:
         all_legal_directions = []
         neighbourhood = StrategyHelper.get_full_neighbourhood(position, gamefield)
         if neighbourhood[3] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.LEFT)
+            all_legal_directions.append(ReturnDirections.WEST)
         if neighbourhood[1] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.NORTH)
-        if neighbourhood[6] != PublicFields.WALL:
             all_legal_directions.append(ReturnDirections.SOUTH)
+        if neighbourhood[6] != PublicFields.WALL:
+            all_legal_directions.append(ReturnDirections.NORTH)
         if neighbourhood[4] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.RIGHT)
+            all_legal_directions.append(ReturnDirections.EAST)
         return all_legal_directions
 
     @staticmethod
@@ -33,8 +33,8 @@ class StrategyHelper:
     @staticmethod
     def get_full_neighbourhood(position, gamefield):
         neighbourhood_array = []
-        player_x = position[0]
-        player_y = position[1]
+        player_x = position[1]
+        player_y = position[0]
         neighbourhood_array = neighbourhood_array + gamefield[int(player_y - 1)][int(player_x - 1):int(player_x + 2)]
         neighbourhood_array = neighbourhood_array + gamefield[int(player_y)][int(player_x - 1):int(player_x + 2)]
         neighbourhood_array.pop(4)
@@ -43,10 +43,23 @@ class StrategyHelper:
 
     @staticmethod
     def get_full_neighbourhood_yx(position):
-        player_x = int(position[0])
-        player_y = int(position[1])
+        player_x = int(position[1])
+        player_y = int(position[0])
         neighbourhood_array = [[player_y - 1,player_x],
                                [player_y, player_x - 1],
                                [player_y, player_x + 1],
                                [player_y + 1, player_x]]
         return neighbourhood_array
+
+    @staticmethod
+    def get_direction_from_positions(current_position, new_position):
+        if current_position[0] != new_position[0]:
+            if current_position[0] < new_position[0]:
+                return ReturnDirections.NORTH
+            else:
+                return ReturnDirections.SOUTH
+        else:
+            if current_position[1] < new_position[1]:
+                return ReturnDirections.EAST
+            else:
+                return ReturnDirections.WEST
