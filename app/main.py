@@ -16,6 +16,12 @@ def start():
 def move():
     data = PublicGameState(ext_dict=bottle.request.json)
     # TODO: Do things with data acces via data
+    game_field = data.gameField
+    players = data.publicPlayers
+    my_player = data.agent_id
+    my_position = players[my_player]['position']
+    print("I am player: "+str(my_player))
+    print("My position is: "+str(my_position))
     return ReturnDirections.random()
 
 application = bottle.default_app()
