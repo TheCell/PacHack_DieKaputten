@@ -17,10 +17,10 @@ class StrategyHelper:
         return all_legal_directions
 
     @staticmethod
-    def get_legal_directions_xypos(position, gamefield):
+    def get_legal_directions_yxpos(position, gamefield):
         all_legal_directions = []
-        neighbourhood = StrategyHelper.get_full_neighbourhood_xy(position)
-        if gamefield[neighbourhood[0][0]][neighbourhood[0][1]] != PublicFields.WALL:
+        neighbourhood = StrategyHelper.get_full_neighbourhood_yx(position)
+        if gamefield[neighbourhood[0][1]][neighbourhood[0][1]] != PublicFields.WALL:
             all_legal_directions.append(neighbourhood[0])
         if gamefield[neighbourhood[1][0]][neighbourhood[1][1]] != PublicFields.WALL:
             all_legal_directions.append(neighbourhood[1])
@@ -42,8 +42,11 @@ class StrategyHelper:
         return neighbourhood_array
 
     @staticmethod
-    def get_full_neighbourhood_xy(position):
+    def get_full_neighbourhood_yx(position):
         player_x = int(position[0])
         player_y = int(position[1])
-        neighbourhood_array = [[player_x, player_y - 1],[player_x - 1, player_y],[player_x + 1, player_y],[player_x, player_y + 1]]
+        neighbourhood_array = [[player_y - 1,player_x],
+                               [player_y, player_x - 1],
+                               [player_y, player_x + 1],
+                               [player_y + 1, player_x]]
         return neighbourhood_array
