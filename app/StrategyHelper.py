@@ -7,13 +7,13 @@ class StrategyHelper:
         all_legal_directions = []
         neighbourhood = StrategyHelper.get_full_neighbourhood(position, gamefield)
         if neighbourhood[3] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.LEFT)
+            all_legal_directions.append(ReturnDirections.EAST)
         if neighbourhood[1] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.NORTH)
-        if neighbourhood[6] != PublicFields.WALL:
             all_legal_directions.append(ReturnDirections.SOUTH)
+        if neighbourhood[6] != PublicFields.WALL:
+            all_legal_directions.append(ReturnDirections.NORTH)
         if neighbourhood[4] != PublicFields.WALL:
-            all_legal_directions.append(ReturnDirections.RIGHT)
+            all_legal_directions.append(ReturnDirections.WEST)
         return all_legal_directions
 
     @staticmethod
