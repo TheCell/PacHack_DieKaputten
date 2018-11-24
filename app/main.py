@@ -5,6 +5,7 @@ import os
 from app.dto.PublicGameState import PublicGameState
 from app.dto.PublicPlayer import PublicPlayer
 from app.dto.ReturnDirections import ReturnDirections
+from app.eatEverythingStrategy import EatEverythingStrategy
 
 
 @bottle.post('/start')
@@ -15,14 +16,14 @@ def start():
 @bottle.post('/chooseAction')
 def move():
     data = PublicGameState(ext_dict=bottle.request.json)
-    # TODO: Do things with data acces via data
     game_field = data.gameField
     players = data.publicPlayers
     my_player = data.agent_id
     my_position = players[my_player]['position']
     print("I am player: "+str(my_player))
     print("My position is: "+str(my_position))
-    return ReturnDirections.random()
+    strategy = EatEverythingStrategy()
+    return strategy.get_move()
 
 application = bottle.default_app()
 if __name__ == '__main__':
