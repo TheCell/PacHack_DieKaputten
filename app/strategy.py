@@ -5,8 +5,8 @@ class Strategy:
         self.game_field = game_field
         self.my_player = my_player
         self.my_position = my_position
+        self.optimum_position = False
         self.choice = ReturnDirections.random()
 
     def get_move(self):
-        print(str(self.my_player))
         return self.choice
