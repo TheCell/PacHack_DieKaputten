@@ -21,14 +21,28 @@ class WalkAroungStrategy(Strategy):
         for move in StrategyHelper.get_legal_directions(self.my_position, self.game_field):
             moves.append(move)
 
+        if self.my_position[1] > 27:
+            WalkAroungStrategy.hit_right_side = True
+
+        if self.my_position[1] < 5:
+            WalkAroungStrategy.hit_right_side = False
+
+        print(WalkAroungStrategy.hit_right_side)
         self.remove_origin_position_if_more_avail(moves)
 
         if WalkAroungStrategy.preference in moves:
-            if (WalkAroungStrategy.previousmove is not ReturnDirections.WEST) and (ReturnDirections.EAST in moves):
-                WalkAroungStrategy.preference = ReturnDirections.EAST
-            elif len(moves) > 2:
-                self.remove_origin_position_if_more_avail(moves)
-                WalkAroungStrategy.preference = random.choice(moves)
+            if WalkAroungStrategy.hit_right_side:
+                if (WalkAroungStrategy.previousmove is not ReturnDirections.EAST) and (ReturnDirections.WEST in moves):
+                    WalkAroungStrategy.preference = ReturnDirections.WEST
+                elif len(moves) > 2:
+                    self.remove_origin_position_if_more_avail(moves)
+                    WalkAroungStrategy.preference = random.choice(moves)
+            else:
+                if (WalkAroungStrategy.previousmove is not ReturnDirections.WEST) and (ReturnDirections.EAST in moves):
+                    WalkAroungStrategy.preference = ReturnDirections.EAST
+                elif len(moves) > 2:
+                    self.remove_origin_position_if_more_avail(moves)
+                    WalkAroungStrategy.preference = random.choice(moves)
             WalkAroungStrategy.choice = WalkAroungStrategy.preference
             print("is in if " + str(WalkAroungStrategy.choice))
         else:
