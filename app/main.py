@@ -25,7 +25,9 @@ def move():
     my_position = [temp_position[1], temp_position[0]]
     print("I am player: "+str(my_player))
     print("My position is: "+str(my_position))
-    strategy = EatEverythingStrategy(game_field, my_player, my_position)
+    #strategy = EatEverythingStrategy(game_field, my_player, my_position)
+    strategy = WalkAroungStrategy(game_field, my_player, my_position)
+
     return strategy.get_move()
 
 application = bottle.default_app()
